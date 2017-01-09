@@ -1,6 +1,5 @@
 % Nima Ghorbani
 % Goal: Oriented PCA
-
 close all; clc; clear all;
 
 % OPCA
@@ -23,7 +22,7 @@ CY1 = cov(Y1'); % new class condtional covariance
 CYn = (CY0+CY1)/2;
 [UCYn, DCYn, ~] = svd(CYn);
 figure(100);imagesc(DCYn);colorbar
-title('2.a Eigenvalues of C_{yn} in descending order');
+title('Eigenvalues of C_{yn} in descending order');
 
 %% 3rd Step) Noise whitening
 Z = sqrtm(CYn)^-1*Y;
@@ -32,7 +31,7 @@ CZ0 = cov(Z0'); CZ1 = cov(Z1'); % class conditional covariace of new matriices w
 CZn = (CZ0+CZ1)/2; 
 [UCZn, DCZn, ~] = svd(CZn); 
 figure(101);imagesc(DCZn);colorbar
-title('2.b Eigenvalues of C_{zn} showing isotropic noise variance');
+title('Eigenvalues of C_{zn} showing isotropic noise variance');
 
 %% 4th Step) Another PCA this time over noise whitened data
 CZ = cov(Z');
@@ -55,8 +54,8 @@ legend(subplot223,'S0','S1');
 
 subplot(2,2,1);imagesc(reshape(X0_kk,28,28));%colormap(gray);
 subplot(2,2,4);imagesc(reshape(X1_kk,28,28));%colormap(gray);
-suptitle('2.c oriented PCA')
-%% 2.d clasification
+suptitle('Oriented PCA')
+%% Clasification
 MS0 = mean(S0,2); MS1 = mean(S1,2);
 CS0 = cov(S0'); CS1 = cov(S1');
 CS = (1/2) * (CS0 + CS1); % equal covariances
