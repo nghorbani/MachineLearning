@@ -1,7 +1,9 @@
 # Some Machine Learning Experiences
 
 ## Bayesian Optimization with Gaussian Processes
-Using Expected Improvement acquisition function.
+[**BO in Python**](BayesianOptimization/BayesianOptimization.ipynb)
+
+Using Expected Improvement acquisition function:
 ![alt tag](images/OB1DSample.gif)
 
 ## Gaussian Process Regression and Classification
