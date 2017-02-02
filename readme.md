@@ -1,4 +1,9 @@
 # Some Machine Learning Experiences
+
+## Bayesian Optimization with Gaussian Processes
+Using Expected Improvement acquisition function.
+![alt tag](images/OB1DSample.gif)
+
 ## Gaussian Process Regression and Classification
 
 [**GPR in Python**](GaussianProcesses/GRP.ipynb)
