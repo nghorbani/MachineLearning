@@ -69,7 +69,7 @@ Here have projected input to a hd feature space with the help of basis functions
 
 ### Basics of PCA
 
-[matlab code](PCA/pca_basics.m)
+[matlab code](PrincipleComponentAnalysis/pca_basics.m)
 
 ![alt tag](images/pca_basics.png)
 
