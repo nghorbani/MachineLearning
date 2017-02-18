@@ -1,7 +1,7 @@
 %% *Regression using gassuain processes:*
 set(0,'DefaultFigureWindowStyle','docked')
 
-x = [-1.2 -1. -0.8 -0.6 -.4 -0.2 0 0.2 0.4 0.6];
+x = [-1.2 -1. -0.8 -0.6 -.4 -0.2 0 0.2 0.4 0.6]';
 y = [-2 -1 -0.5 -0.25 0.5 0.4 0. 1.2 1.7 1.4];
 %% 
 % we have noisy sensor readings (indicated by errorbars) :
@@ -35,7 +35,7 @@ hold off
 %% 
 %  Next we will predict 100 points:
 
-x_predict = linspace(-1.7,1,100);
+x_predict = linspace(-1.7,1,100)';
 
 sigmaf=0.1; l=0.5;
 
@@ -81,13 +81,19 @@ hold off;
 % as the points get far from each other. the lenght scale defines how rapid these 
 % changes will be and it is a hyperprameter of our model:
 
-function K = get_kernel(x1,x2,sigmaf,l,sigman)
-    k = @(x1,x2,sigmaf,l,sigman) (sigmaf^2)*exp(-(1/(2*l^2))*(x1-x2)*(x1-x2)') + (sigman^2);
-    K = zeros(numel(x1),numel(x2));
-    for i = 1:numel(x1)
-        for j = 1:numel(x2)
-            if i==j;K(i,j) = k(x1(i),x2(j),sigmaf,l,sigman);
-            else;K(i,j) = k(x1(i),x2(j),sigmaf,l,0);end
-        end
+function K = get_kernel(X1,X2,sigmaf,l,sigman)
+%     k = @(x1,x2,sigmaf,l,sigman) (sigmaf^2)*exp(-(1/(2*l^2))*(x1-x2)*(x1-x2)') + (sigman^2);
+%     K = zeros(size(x1,1),size(x2,1));
+%     for i = 1:size(x1,1)
+%         for j = 1:size(x2,1)
+%             if i==j;K(i,j) = k(x1(i,:),x2(j,:),sigmaf,l,sigman);
+%             else;K(i,j) = k(x1(i,:),x2(j,:),sigmaf,l,0);end
+%         end
+%     end
+    sum_X1 = sum(X1 .^ 2, 2);
+    sum_X2 = sum(X2 .^ 2, 2);
+    K = (sigmaf^2)*exp(bsxfun(@plus, bsxfun(@plus, -2 * (X1 * X2'), sum_X1), sum_X2') / (-2 * l ^ 2));
+    if size(K,1)== size(K,2)
+        K = K+(sigman^2)*eye(size(X1,1));
     end
 end
