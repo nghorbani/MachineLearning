@@ -6,14 +6,14 @@ function [X,l,sigmaf] = gplvm(Y, q)
 
     Um = U(:,1:q);
     X0 = Y*Um;%initializing with PCA 
-    l0 = 1;sigmaf0=0.5;        
+    l0 = .8;sigmaf0=0.75;        
     p0 = [X0(:); l0;sigmaf0]';
     
     scgoptions = [1,  1e-4, 1e-4, 1e-6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1e-8, 0.1, 0];
     %scgoptions(14)=200; %maxiter
-    %p = minimize(p0, 'gplvm_grad', -500, Y);
+    %p = minimize(p0, 'LogLikeandGrad', -500, Y);
     [p, scgoptions, ~, ~, ~] = scg('LogLike', p0, scgoptions, 'LogLikeGrad',Y);
-    %diffgrads = checkgrad('gplvm_grad', p0, 1e-10, Y)
+%     diffgrads = checkgrad('LogLikeandGrad', p0', 1e-10, Y)
     %scgoptions(10) % number of iterations 
     X = p(1:end-2);
     l = p(end-1:end-1);

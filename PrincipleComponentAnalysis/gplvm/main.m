@@ -1,5 +1,5 @@
 close all; close all; clc
-[X, labels] = generate_data('helix', 500);
+[X, labels] = generate_data('helix', 1000);
 figure, scatter3(X(:,1), X(:,2), X(:,3), 5, labels); title('Original dataset'), drawnow
 q = 2;%round(intrinsic_dim(X, 'MLE'));
 % disp(['MLE estimate of intrinsic dimensionality: ' num2str(no_dims)]);

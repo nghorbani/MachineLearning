@@ -16,19 +16,18 @@ function [L, dLdP] = LogLikeandGrad(p, Y)
     KinvYYT = (Kinv * Y) * Y';
     dLdK = KinvYYT * Kinv - d * Kinv;
 
-
-    dLdX = zeros(n, q);
-    for i=1:n
-        dLdX(i,:) = sum(-l*dLdK(i,:)'.*(K(i,:)'.*(X(i,:)-X)), 1);
-    end
-        
 %     dLdX = zeros(n, q);
-%     for i=1:q
-%         K1 = reshape(X(:,i),n,1);
-%         K2 = reshape(X(:,i),1,n);
-%         dKdX = -l*(K1-K2).*K;
-%         dLdX(:,i) = (2*sum(dLdK.*dKdX,1));
+%     for i=1:n
+%         dLdX(i,:) = sum(-l*dLdK(i,:)'.*(K(i,:)'.*(X(i,:)-X)), 1);
 %     end
+        
+    dLdX = zeros(n, q);
+    for i=1:q
+        K1 = reshape(X(:,i),n,1);
+        K2 = reshape(X(:,i),1,n);
+        dKdX = l.*(K1-K2).*K;
+        dLdX(:,i) = (sum(dLdK.*dKdX,1));
+    end
  
     dLdl = 0.5*sum(sum(dLdK.*(-0.5*sqDistance.*K)));%0.5*trace((KinvYYT-Kinv)*(l^-3)*K);
     dLdsigmaf = sum(sum(dLdK.*(K / sigmaf)));
