@@ -9,7 +9,7 @@ q = 2;%round(intrinsic_dim(X, 'MLE'));
 [Xpca]=PCA(Y,q);
 figure, scatter(Xpca(:,1), Xpca(:,2), 5, labels); title('Result of PCA');
 
-Xgplvm = gplvm(Y, q);
+[Xgplvm,l,sigmaf] = gplvm(Y, q);
 figure, scatter(Xgplvm(:,1), Xgplvm(:,2), 5, labels); title('Result of GPLVM');
 
 
