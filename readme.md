@@ -3,6 +3,8 @@
 ## Bayesian Optimization with Gaussian Processes
 [**BO in Python**](BayesianOptimization/BayesianOptimization.ipynb)
 
+You will an example of optimizing a simple Neural Network's Hyperparameters with Bayesian Optimization
+
 Using Expected Improvement acquisition function:
 ![alt tag](images/OB1DSample.gif)
 
